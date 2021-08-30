@@ -3,3 +3,11 @@ insert into materia_prima (cantidad_unidades_en_bodega, costo_por_unidad, nombre
 insert into materia_prima (cantidad_unidades_en_bodega, costo_por_unidad, nombre, unidades) values(200,30.2,'maicillo','quintales');
 insert into materia_prima (cantidad_unidades_en_bodega, costo_por_unidad, nombre, unidades) values(100,30.2,'maíz blanco','quintales');
 insert into materia_prima (cantidad_unidades_en_bodega, costo_por_unidad, nombre, unidades) values(40,10.2,'vitaminas','cajas');
+insert into cliente (direccion,nit,nombre,telefono) values('Armenia, Sonsonate','78-44334-5665','Juan','3445-7644');
+insert into cliente (direccion,nit,nombre,telefono) values('Sonsonate, Sonsonate','44-766564-9899','Pedro','7888-2341');
+insert into cliente (direccion,nit,nombre,telefono) values('San Salvador, San Salvador','34-44334-5665','Karina','3445-7644');
+insert into cliente (direccion,nit,nombre,telefono) values('Armenia, Sonsonate','34-78666-9977','Ana','8756-9856');
+insert into cliente (direccion,nit,nombre,telefono) values('Armenia, Sonsonate','44-5678-98777','Carlos','6767-9856');
+insert into concentrado (nombre,precio_por_quintal) values('comun',50);
+insert into ingrediente_por_quintal (cantidad_unidades,id_concentrado,id_materia_prima) values(0.2,1,1);
+insert into ingrediente_por_quintal (cantidad_unidades,id_concentrado,id_materia_prima) values(0.8,1,2);

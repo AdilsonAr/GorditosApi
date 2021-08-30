@@ -1,39 +1,13 @@
-package com.dev.model;
+package com.dev.dto;
 
-import java.util.List;
+import com.dev.model.MateriaPrima;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-@Entity
-public class MateriaPrima {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MateriaPrimaResponseDto {
 	private int id;
 	private String nombre;
 	private String unidades;
 	private double costoPorUnidad;
 	private double cantidadUnidadesEnBodega;
-	@OneToMany(mappedBy = "materiaPrima")
-	private List<IngredientePorQuintal> ingredientes;
-	@OneToMany(mappedBy = "materiaPrima")
-	private List<Compra> compras;
-	
-	public List<IngredientePorQuintal> getIngredientes() {
-		return ingredientes;
-	}
-	public void setIngredientes(List<IngredientePorQuintal> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
-	public List<Compra> getCompras() {
-		return compras;
-	}
-	public void setCompras(List<Compra> compras) {
-		this.compras = compras;
-	}
 	public int getId() {
 		return id;
 	}
@@ -63,6 +37,20 @@ public class MateriaPrima {
 	}
 	public void setCantidadUnidadesEnBodega(double cantidadUnidadesEnBodega) {
 		this.cantidadUnidadesEnBodega = cantidadUnidadesEnBodega;
+	}
+	public MateriaPrimaResponseDto(int id, String nombre, String unidades, double costoPorUnidad,
+			double cantidadUnidadesEnBodega) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.unidades = unidades;
+		this.costoPorUnidad = costoPorUnidad;
+		this.cantidadUnidadesEnBodega = cantidadUnidadesEnBodega;
+	}
+	
+	public static MateriaPrimaResponseDto toDto(MateriaPrima m) {
+		return new MateriaPrimaResponseDto(m.getId(),m.getNombre(),m.getUnidades(),
+				m.getCostoPorUnidad(),m.getCantidadUnidadesEnBodega());
 	}
 	
 }
