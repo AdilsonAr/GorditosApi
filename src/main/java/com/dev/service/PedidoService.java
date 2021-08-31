@@ -12,7 +12,7 @@ import com.dev.repository.PedidoRepository;
 @Service
 public class PedidoService {
 	@Autowired
-	PedidoRepository repo;
+	private PedidoRepository repo;
 	public void create(Pedido p) {
 		p.setFecha(LocalDateTime.now());
 		p.setEstado("en proceso");
@@ -21,5 +21,12 @@ public class PedidoService {
 	
 	public List<Pedido> readAll(){
 		return repo.findAll();
+	}
+	
+	public double monto(int idPedido) {
+		Pedido p = repo.findById(idPedido).get();
+		double precioQuintal=p.getConcentrado().getPrecioPorQuintal();
+		double cantidadQuintales=p.getQuintales();
+		return precioQuintal*cantidadQuintales;
 	}
 }

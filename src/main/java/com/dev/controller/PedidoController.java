@@ -20,7 +20,7 @@ import com.dev.service.PedidoService;
 @RequestMapping("/pedido")
 public class PedidoController {
 	@Autowired
-	PedidoService service;
+	private PedidoService service;
 	
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody PedidoRequestDto p){

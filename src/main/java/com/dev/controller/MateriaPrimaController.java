@@ -17,7 +17,7 @@ import com.dev.service.MateriaPrimaService;
 @RequestMapping("/materia")
 public class MateriaPrimaController {
 	@Autowired
-	MateriaPrimaService service;
+	private MateriaPrimaService service;
 	@GetMapping
 	public ResponseEntity<?> readAll(){
 		List<MateriaPrimaResponseDto> dtos=new ArrayList<>();

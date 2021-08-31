@@ -19,6 +19,7 @@ public class Venta {
 	@OneToOne
 	@JoinColumn(name="idPedido")
 	private Pedido pedido;
+	
 	public int getId() {
 		return id;
 	}
@@ -42,6 +43,16 @@ public class Venta {
 	}
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+	public Venta(LocalDateTime fecha, double monto, Pedido pedido) {
+		super();
+		this.fecha = fecha;
+		this.monto = monto;
+		this.pedido = pedido;
+	}
+	public Venta() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }

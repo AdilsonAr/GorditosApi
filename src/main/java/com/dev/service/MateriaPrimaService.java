@@ -11,7 +11,7 @@ import com.dev.repository.MateriaPrimaRepository;
 @Service
 public class MateriaPrimaService {
 	@Autowired
-	MateriaPrimaRepository repo;
+	private MateriaPrimaRepository repo;
 	public List<MateriaPrima> readAll(){
 		return repo.findAll();
 	}
