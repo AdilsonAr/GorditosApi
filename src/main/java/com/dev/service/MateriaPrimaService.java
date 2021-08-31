@@ -15,4 +15,8 @@ public class MateriaPrimaService {
 	public List<MateriaPrima> readAll(){
 		return repo.findAll();
 	}
+	
+	public void update(MateriaPrima m) {
+		repo.save(m);
+	}
 }

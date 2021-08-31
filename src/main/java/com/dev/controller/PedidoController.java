@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,18 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.dto.PedidoRequestDto;
 import com.dev.dto.PedidoResponseDto;
+import com.dev.dto.Resultado;
 import com.dev.service.PedidoService;
 
 @RestController
 @RequestMapping("/pedido")
+@CrossOrigin
 public class PedidoController {
 	@Autowired
 	private PedidoService service;
 	
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody PedidoRequestDto p){
-		service.create(PedidoRequestDto.toModel(p));
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		if(service.tieneMateriaPrima(p.getQuintales(), p.getIdConcentrado())) {
+			service.create(PedidoRequestDto.toModel(p));
+			service.descontarMateriaPrima(p.getQuintales(), p.getIdConcentrado());
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<>(new Resultado("No hay suficiente materia prima"), HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	@GetMapping
 	public ResponseEntity<?> readAll(){
