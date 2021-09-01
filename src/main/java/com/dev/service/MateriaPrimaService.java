@@ -19,4 +19,8 @@ public class MateriaPrimaService {
 	public void update(MateriaPrima m) {
 		repo.save(m);
 	}
+	
+	public MateriaPrima findId(int id) {
+		return repo.findById(id).get();
+	}
 }

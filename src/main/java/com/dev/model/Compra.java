@@ -44,6 +44,11 @@ public class Compra {
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
-	
+	public Compra(LocalDateTime fecha, double cantidad, MateriaPrima materiaPrima) {
+		super();
+		this.fecha = fecha;
+		this.cantidad = cantidad;
+		this.materiaPrima = materiaPrima;
+	}
 	
 }
