@@ -1,17 +1,13 @@
 package com.dev.dto;
 
+import com.dev.model.Cliente;
+
 public class ClienteRequestDto {
-	private int id;
 	private String nombre;
 	private String nit;
 	private String direccion;
 	private String telefono;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -36,7 +32,7 @@ public class ClienteRequestDto {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public ClienteRequestDto(int id, String nombre, String nit, String direccion, String telefono) {
+	public ClienteRequestDto(String nombre, String nit, String direccion, String telefono) {
 		super();
 		this.nombre = nombre;
 		this.nit = nit;
@@ -48,5 +44,7 @@ public class ClienteRequestDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	public static Cliente toMOdel(ClienteRequestDto c) {
+		return new Cliente(c.getNombre(), c.getNit(),c.getDireccion(),c.getTelefono());
+	}
 }
