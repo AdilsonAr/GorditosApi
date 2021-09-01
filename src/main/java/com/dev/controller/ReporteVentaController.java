@@ -35,7 +35,7 @@ public class ReporteVentaController {
     	
         ByteArrayInputStream bis;
 		try {
-			bis = reporteVentaService.getReporte(ventaService.readByCliente(id));
+			bis = reporteVentaService.getReporte(ventaService.readByCliente(id),"Reporte por cliente");
 			HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Disposition", "inline; filename=ventas-por-cliente.pdf");
 	        return ResponseEntity
@@ -54,7 +54,7 @@ public class ReporteVentaController {
     public ResponseEntity<?> mes(@RequestParam @DateTimeFormat(iso = ISO.DATE) LocalDate fecha) {
         ByteArrayInputStream bis;
 		try {
-			bis = reporteVentaService.getReporte(ventaService.readByMes(fecha.getYear(), fecha.getMonthValue()));
+			bis = reporteVentaService.getReporte(ventaService.readByMes(fecha.getYear(), fecha.getMonthValue()),"Reporte por mes "+fecha.getYear()+"/"+fecha.getMonthValue());
 			HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Disposition", "inline; filename=ventas-por-mes.pdf");
 	        return ResponseEntity

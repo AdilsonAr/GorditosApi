@@ -3,6 +3,7 @@ package com.dev.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,9 @@ public class VentaService {
 	
 	public List<Venta> readAll(){
 		return repo.findAll();
+	}
+	
+	public Venta readId(int id) throws NoSuchElementException{
+		return repo.findById(id).orElseThrow();
 	}
 }

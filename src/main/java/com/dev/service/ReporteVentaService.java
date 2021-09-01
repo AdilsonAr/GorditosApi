@@ -20,7 +20,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 public class ReporteVentaService {
-	public ByteArrayInputStream getReporte(List<Venta> lista) throws DocumentException {
+	public ByteArrayInputStream getReporte(List<Venta> lista, String title) throws DocumentException {
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		PdfPTable table = new PdfPTable(5);
@@ -82,6 +82,8 @@ public class ReporteVentaService {
 
         PdfWriter.getInstance(document, out);
         document.open();
+        document.addTitle(title);
+        document.add(new Phrase(title));
         document.add(table);
         
         document.close();

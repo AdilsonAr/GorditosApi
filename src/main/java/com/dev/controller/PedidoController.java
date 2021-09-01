@@ -30,7 +30,7 @@ public class PedidoController {
 		if(service.tieneMateriaPrima(p.getQuintales(), p.getIdConcentrado())) {
 			service.create(PedidoRequestDto.toModel(p));
 			service.descontarMateriaPrima(p.getQuintales(), p.getIdConcentrado());
-			return new ResponseEntity<>(HttpStatus.CREATED);
+			return new ResponseEntity<>(new Resultado("El pedido se registro exitosamente"), HttpStatus.CREATED);
 		}else {
 			return new ResponseEntity<>(new Resultado("No hay suficiente materia prima"), HttpStatus.BAD_REQUEST);
 		}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.dto.CompraRequestDto;
+import com.dev.dto.Resultado;
 import com.dev.service.CompraService;
 
 @RestController
@@ -21,7 +22,11 @@ public class CompraController {
 	
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody CompraRequestDto c){
-		service.create(CompraRequestDto.toMOdel(c));
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		if(c.getCantidad()>0) {
+			service.create(CompraRequestDto.toMOdel(c));
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<>(new Resultado("cantidad no permitida"), HttpStatus.BAD_REQUEST);
+		}
 	}
 }
