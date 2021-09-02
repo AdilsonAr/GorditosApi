@@ -1,5 +1,7 @@
 package com.dev.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class CompraService {
 	@Autowired
 	private MateriaPrimaService serviceMateria;
 	
-	public void create(Compra c) {
+	public void create(Compra c) throws NoSuchElementException {
 		MateriaPrima m = serviceMateria.findId(c.getMateriaPrima().getId());
 		m.setCantidadUnidadesEnBodega(m.getCantidadUnidadesEnBodega()+c.getCantidad());
 		repo.save(c);

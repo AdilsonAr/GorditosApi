@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dev.dto.Resultado;
 import com.dev.service.FacturaService;
 import com.itextpdf.text.DocumentException;
 
@@ -40,9 +41,9 @@ public class FacturaController {
 	                .body(new InputStreamResource(bis));
 		} catch (DocumentException e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new Resultado("tuvimos problemas al crear el documento"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(NoSuchElementException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new Resultado("venta no encontrada"), HttpStatus.BAD_REQUEST);
 		}
         
     }

@@ -3,6 +3,7 @@ package com.dev.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dev.dto.Resultado;
 import com.dev.dto.VentaResponseDto;
 import com.dev.model.Pedido;
 import com.dev.model.Venta;
@@ -32,11 +34,17 @@ public class VentaController {
 	
 	@PostMapping
 	public ResponseEntity<?> create(@RequestParam int idPedido){
-		double monto=pedidoService.monto(idPedido);
-		Pedido p=new Pedido();
-		p.setId(idPedido);
-		service.create(new Venta(LocalDateTime.now(), monto, p));
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		try {
+			double monto=pedidoService.monto(idPedido);
+			Pedido p=new Pedido();
+			p.setId(idPedido);
+			
+			service.create(new Venta(LocalDateTime.now(), monto, p));
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}catch(NoSuchElementException e){
+			return new ResponseEntity<>(new Resultado("No se encontro el pedido"), HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	
 	@GetMapping

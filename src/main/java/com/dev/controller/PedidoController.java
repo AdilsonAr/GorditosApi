@@ -2,6 +2,7 @@ package com.dev.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,14 +28,17 @@ public class PedidoController {
 	
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody PedidoRequestDto p){
-		if(service.tieneMateriaPrima(p.getQuintales(), p.getIdConcentrado())) {
-			service.create(PedidoRequestDto.toModel(p));
-			service.descontarMateriaPrima(p.getQuintales(), p.getIdConcentrado());
-			return new ResponseEntity<>(new Resultado("El pedido se registro exitosamente"), HttpStatus.CREATED);
-		}else {
-			return new ResponseEntity<>(new Resultado("No hay suficiente materia prima"), HttpStatus.BAD_REQUEST);
+		try {
+			if(service.tieneMateriaPrima(p.getQuintales(), p.getIdConcentrado())) {
+				service.create(PedidoRequestDto.toModel(p));
+				service.descontarMateriaPrima(p.getQuintales(), p.getIdConcentrado());
+				return new ResponseEntity<>(new Resultado("El pedido se registro exitosamente"), HttpStatus.CREATED);
+			}else {
+				return new ResponseEntity<>(new Resultado("No hay suficiente materia prima"), HttpStatus.BAD_REQUEST);
+			}
+		}catch(NoSuchElementException e) {
+			return new ResponseEntity<>(new Resultado("algunas referencias a otros datos no fueron encontradas"), HttpStatus.BAD_REQUEST);
 		}
-		
 	}
 	@GetMapping
 	public ResponseEntity<?> readAll(){

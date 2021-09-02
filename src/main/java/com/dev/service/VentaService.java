@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dev.model.Cliente;
+import com.dev.model.Pedido;
 import com.dev.model.Venta;
 import com.dev.repository.PedidoRepository;
 import com.dev.repository.VentaRepository;
@@ -20,6 +21,9 @@ public class VentaService {
 	
 	@Autowired
 	private PedidoRepository pedidoRepo;
+	
+	@Autowired
+	private PedidoService pedidoService;
 	
 	public List<Venta> readByCliente(int id) {
 		Cliente c =new Cliente();
@@ -40,8 +44,11 @@ public class VentaService {
 		return repo.findByFechaAfterAndFechaBefore(despues, antes);
 	}
 	
-	public void create(Venta v) {
+	public void create(Venta v) throws NoSuchElementException{
+		Pedido p=pedidoService.readId(v.getPedido().getId());
+		p.setEstado("entregado");
 		repo.save(v);
+		pedidoService.update(p);
 	}
 	
 	public List<Venta> readAll(){

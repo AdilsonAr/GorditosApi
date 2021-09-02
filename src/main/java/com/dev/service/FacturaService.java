@@ -26,6 +26,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class FacturaService {
 	@Autowired
 	private VentaService ventaService;
+	
 	private final String NIT="344343-4434-434";
 	
 	public ByteArrayInputStream getFactura(int id) throws NoSuchElementException, DocumentException {

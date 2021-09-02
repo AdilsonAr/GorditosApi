@@ -19,7 +19,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
-public class ReporteVentaService {
+public class VentaReporteService {
 	public ByteArrayInputStream getReporte(List<Venta> lista, String title) throws DocumentException {
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
